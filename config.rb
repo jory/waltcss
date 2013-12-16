@@ -1,0 +1,5 @@
+http_path = "/"
+css_dir = "output/scss-compass"
+sass_dir = "scss-compass"
+images_dir = "images"
+javascripts_dir = "javascripts"
