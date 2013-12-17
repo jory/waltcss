@@ -1,0 +1,74 @@
+@import "bourbon/bourbon";
+
+// @import "bourbon/bourbon/css3/transform";
+// @import "bourbon/bourbon/css3/animation";
+// @import "bourbon/bourbon/css3/keyframes";
+
+@mixin animator($target, $name, $animations...) {
+  ////////////////////////////////////////////
+  //
+  // each $animation in $animations has the following signature
+  //   -> ($delay $duration $timing-function $stops)
+  //
+  // each $stop in $stops has the folowing signature
+  //   -> ($position $property $value)
+  //  
+  ////////////////////////////////////////////
+
+  $totalDuration: 0;
+
+  @each $animation in $animations {
+    $delay: nth($animation, 1);
+    $duration: nth($animation, 2);
+
+    $totalDuration: $totalDuration + $delay + $duration;
+  }
+
+  #{$target} {
+    @include animation-name($name);
+    @include animation-duration(#{$totalDuration}ms);
+    @include animation-iteration-count(infinite);
+  }
+
+  @include keyframes($name) {
+    $time-elapsed: 0;
+
+    @each $animation in $animations {
+      $delay: nth($animation, 1);
+      $duration: nth($animation, 2);
+      $timing-function: nth($animation, 3);
+
+      $time-elapsed: $time-elapsed + $delay;
+
+      @include metaKeyframes($totalDuration, $duration, $timing-function, $time-elapsed, nth($animation, 4));
+
+      $time-elapsed: $time-elapsed + $duration;
+    }
+  }
+}
+
+@mixin metaKeyframes($totalDuration, $duration, $timing-function, $delay, $stops) {
+  $n: length($stops);
+
+  @for $i from 1 through $n {
+    $stop: nth($stops, $i);
+    $position: nth($stop, 1);
+    $property: nth($stop, 2);
+    $value: nth($stop, 3);
+
+    #{percentage((($position * $duration) + $delay) / $totalDuration)} {
+
+      @if $property == scale {
+        @include transform(scale(#{$value}));
+      } @else {
+        #{$property}: #{$value};
+      }
+
+      @if $i < $n {
+        @include animation-timing-function($timing-function);
+      } @else {
+        @include animation-timing-function(step-end);
+      }
+    }
+  }
+}
