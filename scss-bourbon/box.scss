@@ -25,19 +25,19 @@
 }
   
 
-@keyframes box {
+@include keyframes(box) {
   0%  { @include transform(translate(0, 0) scale(0)); }
   25% { @include transform(translate(0, 0) scale(1)); }
   50% { @include transform(translate(0, 0) scale(0)); 
         @include animation-timing-function(step-start); }
-  51% { @include transform(translate(-150%, 0) scale(0)); }
-  52% { @include transform(translate(-150%, 0) scale(1)); }
-  75% { @include transform(translate(150%, 0) scale(1)); }
-  76% { @include transform(translate(150%, 0) scale(0)); }
-  77% { @include transform(translate(0, -150%) scale(0)); }
-  78% { @include transform(translate(0, -150%) scale(1)); }
-  99% { @include transform(translate(0, 150%) scale(1)); }
-  100% { @include transform(translate(0, 150%) scale(0)); }
+  51% { @include transform(translate(-250%, 0) scale(0)); }
+  52% { @include transform(translate(-250%, 0) scale(1)); }
+  75% { @include transform(translate(250%, 0) scale(1)); }
+  76% { @include transform(translate(250%, 0) scale(0)); }
+  77% { @include transform(translate(0, -250%) scale(0)); }
+  78% { @include transform(translate(0, -250%) scale(1)); }
+  99% { @include transform(translate(0, 250%) scale(1)); }
+  100% { @include transform(translate(0, 250%) scale(0)); }
 }
 
 .box {
