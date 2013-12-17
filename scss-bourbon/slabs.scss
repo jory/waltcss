@@ -1,0 +1,31 @@
+@import "animator";
+@import "easings";
+
+$n: 24;
+$baseDelay: 150;
+$baseSelector: '.isCurrent .slab-container';
+
+$longestDelay: $n * $baseDelay;
+
+$totalDuration: 3 * $longestDelay + 2000;
+
+$scale: 500;
+$opacity: 1000;
+
+@for $i from 1 through $n {
+  $delay: ($i * $baseDelay);
+
+  $outer: $baseSelector + '.ord-#{$i}';
+  $inner: $outer + ' .slab::before';
+
+  @include 
+    animator($outer, outer-#{$i}, 
+             ($delay, $scale, $easeOutCubic, ((0 scale 0), (1 scale 1))),
+             (2 * $longestDelay + $opacity, $scale, $easeOutCubic, ((0 scale 1), (1 scale 0))),
+             ($longestDelay - $delay, 0, ease, ((0 scale 0), (1 scale 0))));
+
+  @include 
+    animator($inner, inner-#{$i},
+             ($delay + $scale + $longestDelay, $opacity, $easeOutExpo, ((0 opacity 1), (1 opacity 0))),
+             (2 * $longestDelay - $delay + $scale, 0, step-end, ((0 opacity 0), (1 opacity 0))));
+}

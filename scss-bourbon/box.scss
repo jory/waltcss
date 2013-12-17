@@ -22,6 +22,7 @@
   margin: auto;
   
   @include position(absolute, 0px 0px 0px 0px);
+  @include animation(box 10000ms ease infinite);
 }
   
 
@@ -39,8 +40,3 @@
   99% { @include transform(translate(0, 250%) scale(1)); }
   100% { @include transform(translate(0, 250%) scale(0)); }
 }
-
-.box {
-  @include animation(box 10000ms ease infinite);
-}
-

@@ -15,7 +15,10 @@
   top: 0px;
   right: 0px;
   bottom: 0px;
-  left: 0px; }
+  left: 0px;
+  -webkit-animation: box 10000ms ease infinite;
+  -moz-animation: box 10000ms ease infinite;
+  animation: box 10000ms ease infinite; }
 
 @-webkit-keyframes box {
   0% {
@@ -155,8 +158,3 @@
 
   100% {
     transform: translate(0, 250%) scale(0); } }
-
-.box {
-  -webkit-animation: box 10000ms ease infinite;
-  -moz-animation: box 10000ms ease infinite;
-  animation: box 10000ms ease infinite; }
